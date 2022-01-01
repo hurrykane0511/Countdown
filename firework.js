@@ -9,12 +9,13 @@ return Math.floor(Math.random() * (max - min + 1) + min) //The maximum is inclus
 let canvas = document.getElementById("canvas")
 let ctx = canvas.getContext("2d")
 
-let grd = ctx.createRadialGradient(window.innerWidth/ 2, window.innerHeight/ 2, 200, window.innerWidth/ 2, window.innerHeight/ 2, 600)
+let grd = ctx.createRadialGradient(window.innerWidth/ 2, window.innerHeight/ 2, 100, window.innerWidth/ 2, window.innerHeight/ 2, 300)
     grd.addColorStop(0, "#62287038")
     grd.addColorStop(1, "#01001a3d")
   
   canvas.width = window.innerWidth
   canvas.height = window.innerHeight
+
 
 let gravity = -0.1
 
@@ -109,7 +110,7 @@ let update = () => {
         
         setTimeout(()=>{
             initializeCount --
-        }, initDelay)
+        }, getRandomInt(500, 2000))
         initializeCount ++
     }
     fireworks.forEach((firework,i)=>{
@@ -150,4 +151,3 @@ let draw = () => {
     })
 }
     
-animate()

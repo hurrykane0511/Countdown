@@ -51,4 +51,9 @@ function StartFireworks() {
   const min = document.querySelector("#mins");
   const sec = document.querySelector("#secs");
 
+  if (day.innerHTML == 30 && hour.innerHTML == 3 && min.innerHTML == 35 && sec.innerHTML == 20) {
+    animate()
+  }
 }
+
+setInterval(StartFireworks, 500)
