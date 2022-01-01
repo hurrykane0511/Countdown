@@ -53,6 +53,7 @@ function StartFireworks() {
 
   if (day.innerHTML == 30 && hour.innerHTML == 3 && min.innerHTML == 35 && sec.innerHTML == 20) {
     animate()
+    let music = new Audio("./audio/HappyNewYear-ABBA-1595921.mp3")
   }
 }
 

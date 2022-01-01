@@ -7,7 +7,7 @@
 }
 body {
   overflow: hidden;
-  background: radial-gradient(#622870, #01001a);
+  /* background: radial-gradient(#622870, #01001a); */
 }
 .container {
   position: fixed;

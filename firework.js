@@ -1,22 +1,29 @@
 "use strict"
 
 function getRandomInt(min, max) {
-min = Math.ceil(min)
-max = Math.floor(max)
-return Math.floor(Math.random() * (max - min + 1) + min) //The maximum is inclusive and the minimum is inclusive
+    min = Math.ceil(min)
+    max = Math.floor(max)
+    return Math.floor(Math.random() * (max - min + 1) + min) //The maximum is inclusive and the minimum is inclusive
 }
 
 let canvas = document.getElementById("canvas")
 let ctx = canvas.getContext("2d")
 
-let grd = ctx.createRadialGradient(window.innerWidth/ 2, window.innerHeight/ 2, 100, window.innerWidth/ 2, window.innerHeight/ 2, 300)
+
+
+let grd = ctx.createRadialGradient(canvas.width/ 2, canvas.height/ 2, 100, canvas.width/ 2, canvas.height/ 2, 700)
     grd.addColorStop(0, "#62287038")
     grd.addColorStop(1, "#01001a3d")
   
-  canvas.width = window.innerWidth
-  canvas.height = window.innerHeight
+canvas.width = window.innerWidth
+canvas.height = window.innerHeight
 
-
+let grd1 = ctx.createRadialGradient(canvas.width/ 2, canvas.height/ 2, 100, canvas.width/ 2, canvas.height/ 2, 700)
+    grd1.addColorStop(0, "#622870")
+    grd1.addColorStop(1, "#01001a")
+    ctx.fillStyle = grd1
+    ctx.fillRect(0,0,window.innerWidth, window.innerHeight)
+    
 let gravity = -0.1
 
 let fireworks = []
