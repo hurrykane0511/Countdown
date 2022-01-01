@@ -51,10 +51,11 @@ function StartFireworks() {
   const min = document.querySelector("#mins");
   const sec = document.querySelector("#secs");
 
-  if (day.innerHTML == 30 && hour.innerHTML == 3 && min.innerHTML == 35 && sec.innerHTML == 20) {
+  if (day.innerHTML == 30 && hour.innerHTML == 3 && min.innerHTML == 18 && sec.innerHTML == 30) {
     animate()
-    let music = new Audio("./audio/HappyNewYear-ABBA-1595921.mp3")
+    let music = new Audio("./audio/HappyNewYear-ABBA-1595921.mp3");
+    music.play();
   }
 }
 
-setInterval(StartFireworks, 500)
+setInterval(StartFireworks, 1000)
