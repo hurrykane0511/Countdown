@@ -24,30 +24,30 @@ let grd1 = ctx.createRadialGradient(canvas.width/ 2, canvas.height/ 2, 100, canv
     ctx.fillStyle = grd1
     ctx.fillRect(0,0,canvas.width, canvas.height)
 
-let gravity = -0.1
-
 let fireworks = []
 let subFireworks = []
-
+let lastSub = []
   
 class Firework {
-    constructor(x,y, radius, velocityX, velocityY, color)
+    constructor(x,y, radius, velocityX, velocityY, color, vOpacity, gravity)
     {
         this.x = x
         this.y = y
         this.radius = radius
         this.velocityX = velocityX
         this.velocityY = velocityY
+        this.vOpacity = vOpacity
+        this.gravity = gravity
         this.color = color
         this.opacity = 1
     }
 
     update()
     {
-        this.velocityY -= gravity
+        this.velocityY -= this.gravity
         this.x += this.velocityX
         this.y += this.velocityY
-        this.opacity -= 0.006
+        this.opacity -= this.vOpacity
         if(this.opactiy < 0) this.opacity = 0
 
     }
@@ -82,13 +82,13 @@ let animate = () => {
     draw()
 }
 
-let colors = ["Blue", "Orange", "Red", "Purple", "Green"]
+let colors = ["Blue", "Orange", "Red", "Purple", "Green", '#878787','#c6bb9f']
 let initializeCount = 0
 let maximumInitialize = 1
 
 let initDelay = 500// ms
-let fireworkRadius = 5
-let particleCount = 50
+let fireworkRadius = 1
+let particleCount = 100
 let speedMultiplier = 10
 
 let createSubFireworks = (x,y,count,color, speedMultiplier) => {
@@ -100,14 +100,35 @@ let createSubFireworks = (x,y,count,color, speedMultiplier) => {
     {
         let firework = new Firework(x,y,fireworkRadius,
                     Math.cos(radians * created) * Math.random() * speedMultiplier,
-                    Math.sin(radians * created) * Math.random() * speedMultiplier, 
-                    colors[Math.floor(Math.random() * colors.length)])
+                    Math.sin(radians * created) * Math.random() * speedMultiplier,
+                    colors[Math.floor(Math.random() * colors.length)],
+                    0.006,
+                    -0.1
+                    )
 
         subFireworks.push(firework)
         created++
     }
 }
 
+let createLastSub = (x,y,count,color, speedMultiplier) => {
+  
+    let created = 0
+    let radians = (Math.PI * 2) / count
+ 
+    while(created < count )
+    {
+        let firework = new Firework(x,y,fireworkRadius,
+                    Math.cos(radians * created) * Math.random() * speedMultiplier,
+                    Math.sin(radians * created) * Math.random() * speedMultiplier,
+                    colors[Math.floor(Math.random() * colors.length)],
+                    getRandomInt(6,10)/1000
+                    )
+
+        lastSub.push(firework)
+        created++
+    }
+}
 
 let update = () => {
     grd = ctx.createRadialGradient(canvas.width/ 2, canvas.height/ 2, 100, canvas.width/ 2, canvas.height/ 2, 700)
@@ -121,8 +142,11 @@ let update = () => {
         let firework = new Firework(Math.random() * canvas.width,
                                     canvas.height + Math.random() * 70
                                     , fireworkRadius,
-                                    3 * (Math.random() - 0.5), -12,
-                                colors[Math.floor(Math.random() * colors.length)])
+                                    6 * (Math.random() - 0.5), -13,
+                                    colors[Math.floor(Math.random() * colors.length)],
+                                    0.006,
+                                    -0.1
+                                )
         fireworks.push(firework)
         
         setTimeout(()=>{
@@ -133,8 +157,11 @@ let update = () => {
     fireworks.forEach((firework,i)=>{
         if(firework.opacity <= 0.1)
         {
-            let audio = new Audio("./audio/FireWorks-Single-A-www.fesliyanstudios.com.mp3")
-            audio.play();
+            
+            let boom = new Audio("./audio/FireWorks-Single-A-www.fesliyanstudios.com.mp3")
+            boom.autoplay = true
+            boom.play()
+            
             fireworks.splice(i,1)
             createSubFireworks(firework.x, firework.y, particleCount,
             firework.color, speedMultiplier)
@@ -144,14 +171,30 @@ let update = () => {
         }
     })
     subFireworks.forEach((firework,i)=>{
-        if(firework.opacity <= 0)
+        if(firework.opacity <= 0.1)
         {
+            // let boom = new Audio("./audio/FireWorks-Single-A-www.fesliyanstudios.com.mp3")
+            // boom.autoplay = true
+            // boom.play()
+
             subFireworks.splice(i,1)
+            
+            createLastSub(firework.x, firework.y, particleCount,
+                firework.color, speedMultiplier)
         }
         else {
             firework.update()
         }
     })
+    // lastSub.forEach((firework,i)=>{
+    //     if(firework.opacity <= 0)
+    //     {
+    //         lastSub.splice(i,1)
+    //     }
+    //     else {
+    //         firework.update()
+    //     }
+    // })
 }
 
 window.addEventListener("resize", ()=>{
@@ -178,5 +221,9 @@ let draw = () => {
     subFireworks.forEach(firework=>{
         firework.draw()
     })
+    // lastSub.forEach(firework =>{
+    //     firework.draw()
+    // })
 }
     
+animate()

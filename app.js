@@ -12,7 +12,7 @@ function getNewYear() {
 
 const lunarNewYearDate = new Date(getNewYear(), 1, 1, 0, 0, 0, 0);
 document.querySelector('.year').innerHTML = getNewYear();
-
+newYear()
 function newYear() {
   const lunarDate = new Date();
 
@@ -35,14 +35,19 @@ function newYear() {
   var s = Math.floor((thoigianConLai % phut) / giay);
 
   /*Hiển thị kết quả ra các thẻ Div với ID tương ứng*/
-  document.getElementById("days").innerText = d;
-  document.getElementById("hours").innerText = h;
-  document.getElementById("mins").innerText = m;
-  document.getElementById("secs").innerText = s;
+  document.getElementById("days").innerText = formatting(d);
+  document.getElementById("hours").innerText = formatting(h);
+  document.getElementById("mins").innerText = formatting(m);
+  document.getElementById("secs").innerText = formatting(s);
 }
 
 /*Thiết Lập hàm sẽ tự động chạy lại sau 1s*/
 setInterval(newYear, 1000);
+let t = setInterval(StartFireworks, 500)
+
+function formatting(target) {
+  return target < 10 ? '0' + target : target;
+}
 
 function StartFireworks() {
 
@@ -51,19 +56,19 @@ function StartFireworks() {
   const min = document.querySelector("#mins");
   const sec = document.querySelector("#secs");
 
-  if (day.innerHTML == 30 && hour.innerHTML == 0 && min.innerHTML == 0 && sec.innerHTML == 0) {
+  if (day.innerHTML == 30 && hour.innerHTML == 0 && min.innerHTML == 22 && sec.innerHTML == 10) {
     animate()
     let music = new Audio("./audio/HappyNewYear-ABBA-1595921.mp3")
     music.play()
     document.querySelector('.year').classList.add('active');
+    clearInterval(t);
     setTimeout(() => {
       cancelAnimationFrame(req)
       music.pause();
       document.querySelector('.year').classList.remove('active');
       reset();
+      t = setInterval(StartFireworks, 500)
     }, 60000 * 5)
-
   }
 }
 
-setInterval(StartFireworks, 1000)
