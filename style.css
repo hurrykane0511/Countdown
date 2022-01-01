@@ -21,7 +21,18 @@ body {
   flex-direction: column;
   z-index: 100;
   font-family: "Roboto", sans-serif;
-  background-color: rgba(255, 255, 255, 0.05);
+
+}
+.bg_img{
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: bottom / contain no-repeat url("./img/kindpng_2929935.png");
+  background-size: 100%;
+  z-index: 999;
+  opacity: 0.3;
 }
 .container h2 {
   color: #ffd427;
@@ -35,10 +46,10 @@ h2 .year {
   font-size: 200px;
   color: #fff;
   margin-top: 50px;
-  animation: glow 2s infinite linear;
+  animation: waitnewyear 2s infinite ease;
 }
 h2 .year.active {
-  animation: scale 2s ease infinite;
+  animation: happynewyear 2s ease infinite;
 }
 
 .countdown {
@@ -66,24 +77,27 @@ h2 .year.active {
     0 2px 12px rgba(255, 255, 255, 0.24);
 }
 #canvas {
-  /* background: bottom / contain no-repeat url("./img/NicePng_chicago-skyline-silhouette-png_4530119.png"); */
-  background-size: 100% ;
+
 }
-@keyframes scale {
+
+
+@keyframes happynewyear {
   0%,
   100% {
-    transform: scale(1) translateY(0px);
-    text-shadow: 0 20px 30px rgba(255, 255, 0, 0.329),
-      0 25px 35px rgba(255, 255, 0, 0.178);
+    transform: scale(1) ;
+    
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073,
+      0 0 40px #e60073, 0 0 50px #e60073, 0 0 60px #e60073, 0 0 70px #e60073;
   }
   50% {
-    transform: scale(1.5) translateY(50px);
-    text-shadow: 0 5px 15px rgba(255, 255, 0, 0.329),
-      0 2px 12px rgba(255, 255, 0, 0.178);
+    text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6,
+      0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+    transform: scale(1.5) ;
+  
   }
 }
 
-@keyframes glow {
+@keyframes waitnewyear {
   0%,
   100% {
     text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #e60073,
@@ -92,5 +106,11 @@ h2 .year.active {
   50% {
     text-shadow: 0 0 20px #fff, 0 0 30px #ff4da6, 0 0 40px #ff4da6,
       0 0 50px #ff4da6, 0 0 60px #ff4da6, 0 0 70px #ff4da6, 0 0 80px #ff4da6;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .container{
+    transform: scale(0.5) !important;
   }
 }

@@ -11,6 +11,7 @@ function getNewYear() {
 }
 
 const lunarNewYearDate = new Date(getNewYear(), 1, 1, 0, 0, 0, 0);
+document.querySelector('.year').innerHTML = getNewYear();
 
 function newYear() {
   const lunarDate = new Date();
@@ -51,10 +52,16 @@ function StartFireworks() {
   const min = document.querySelector("#mins");
   const sec = document.querySelector("#secs");
 
-  if (day.innerHTML == 30 && hour.innerHTML == 3 && min.innerHTML == 18 && sec.innerHTML == 30) {
+  if (day.innerHTML == 30 && hour.innerHTML == 2 && min.innerHTML == 54 && sec.innerHTML == 10) {
     animate()
-    let music = new Audio("./audio/HappyNewYear-ABBA-1595921.mp3");
-    music.play();
+    let music = new Audio("./audio/HappyNewYear-ABBA-1595921.mp3")
+    music.play()
+
+    setTimeout(() => {
+      cancelAnimationFrame(req)
+      reset();
+    }, 60000)
+
   }
 }
 

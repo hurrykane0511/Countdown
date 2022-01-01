@@ -22,8 +22,8 @@ let grd1 = ctx.createRadialGradient(canvas.width/ 2, canvas.height/ 2, 100, canv
     grd1.addColorStop(0, "#622870")
     grd1.addColorStop(1, "#01001a")
     ctx.fillStyle = grd1
-    ctx.fillRect(0,0,window.innerWidth, window.innerHeight)
-    
+    ctx.fillRect(0,0,canvas.width, canvas.height)
+
 let gravity = -0.1
 
 let fireworks = []
@@ -69,9 +69,15 @@ class Firework {
 
 }
 
+let requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame ||
+                            window.webkitRequestAnimationFrame || window.msRequestAnimationFrame
+
+let cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame 
+
+let req;
 
 let animate = () => {
-    requestAnimationFrame(animate)
+    req = requestAnimationFrame(animate)
     update()
     draw()
 }
@@ -98,14 +104,18 @@ let createSubFireworks = (x,y,count,color, speedMultiplier) => {
                     colors[Math.floor(Math.random() * colors.length)])
 
         subFireworks.push(firework)
-  
         created++
     }
 }
 
+
 let update = () => {
+    grd = ctx.createRadialGradient(canvas.width/ 2, canvas.height/ 2, 100, canvas.width/ 2, canvas.height/ 2, 700)
+    grd.addColorStop(0, "#62287038")
+    grd.addColorStop(1, "#01001a3d")
+
     ctx.fillStyle = grd // this will give tail effect
-    ctx.fillRect(0,0,canvas.width, canvas.height)
+    ctx.fillRect( 0, 0, canvas.width, canvas.height)
     if(initializeCount < maximumInitialize)
     {
         let firework = new Firework(Math.random() * canvas.width,
@@ -144,10 +154,22 @@ let update = () => {
     })
 }
 
-window.addEventListener("resize",()=>{
+window.addEventListener("resize", ()=>{
+
     canvas.width = window.innerWidth
     canvas.height = window.innerHeight
+    reset();
+  
 })
+
+let reset = () =>{
+    grd1 = ctx.createRadialGradient(canvas.width/ 2, canvas.height/ 2, 100, canvas.width/ 2, canvas.height/ 2, 700)
+    grd1.addColorStop(0, "#622870")
+    grd1.addColorStop(1, "#01001a")
+
+    ctx.fillStyle = grd1 // this will give tail effect
+    ctx.fillRect( 0, 0, canvas.width, canvas.height)
+}
 
 let draw = () => {
     fireworks.forEach(firework=> {
