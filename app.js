@@ -29,7 +29,6 @@ function newYear() {
   var gio = phut * 60;
   var ngay = gio * 24;
 
-  /*Tìm ra thời gian theo ngày, giờ, phút giây còn lại thông qua cách chia lấy dư(%) và làm tròn số(Math.floor) trong Javascript*/
   var d = Math.floor(thoigianConLai / ngay);
   var h = Math.floor((thoigianConLai % ngay) / gio);
   var m = Math.floor((thoigianConLai % gio) / phut);
@@ -62,7 +61,7 @@ function StartFireworks() {
       music.pause();
       reset();
     }, 60000 * 5)
-    
+
   }
 }
 
