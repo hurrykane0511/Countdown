@@ -52,7 +52,7 @@ function StartFireworks() {
   const min = document.querySelector("#mins");
   const sec = document.querySelector("#secs");
 
-  if (day.innerHTML == 30 && hour.innerHTML == 2 && min.innerHTML == 54 && sec.innerHTML == 10) {
+  if (day.innerHTML == 30 && hour.innerHTML == 0 && min.innerHTML == 0 && sec.innerHTML == 0) {
     animate()
     let music = new Audio("./audio/HappyNewYear-ABBA-1595921.mp3")
     music.play()
@@ -62,7 +62,7 @@ function StartFireworks() {
       music.pause();
       reset();
     }, 60000 * 5)
-
+    
   }
 }
 
