@@ -59,8 +59,9 @@ function StartFireworks() {
 
     setTimeout(() => {
       cancelAnimationFrame(req)
+      music.pause();
       reset();
-    }, 60000)
+    }, 60000 * 5)
 
   }
 }
