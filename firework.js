@@ -81,7 +81,7 @@ let createSubFireworks = (x,y,count,color, speedMultiplier) => {
   
     let created = 0
     let radians = (Math.PI * 2) / count
-
+ 
     while(created < count )
     {
         let firework = new Firework(x,y,fireworkRadius,
@@ -93,8 +93,8 @@ let createSubFireworks = (x,y,count,color, speedMultiplier) => {
   
         created++
     }
-
 }
+
 let update = () => {
     ctx.fillStyle = grd // this will give tail effect
     ctx.fillRect(0,0,canvas.width, canvas.height)
@@ -106,7 +106,7 @@ let update = () => {
                                     3 * (Math.random() - 0.5), -12,
                                 colors[Math.floor(Math.random() * colors.length)])
         fireworks.push(firework)
-    
+        
         setTimeout(()=>{
             initializeCount --
         }, initDelay)
@@ -115,6 +115,8 @@ let update = () => {
     fireworks.forEach((firework,i)=>{
         if(firework.opacity <= 0.1)
         {
+            let audio = new Audio("./audio/FireWorks-Single-A-www.fesliyanstudios.com.mp3")
+            audio.play();
             fireworks.splice(i,1)
             createSubFireworks(firework.x, firework.y, particleCount,
             firework.color, speedMultiplier)
@@ -134,6 +136,10 @@ let update = () => {
     })
 }
 
+window.addEventListener("resize",()=>{
+    canvas.width = window.innerWidth
+    canvas.height = window.innerHeight
+})
 
 let draw = () => {
     fireworks.forEach(firework=> {
@@ -144,4 +150,4 @@ let draw = () => {
     })
 }
     
-  animate()
+animate()
