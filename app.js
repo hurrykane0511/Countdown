@@ -55,10 +55,11 @@ function StartFireworks() {
     animate()
     let music = new Audio("./audio/HappyNewYear-ABBA-1595921.mp3")
     music.play()
-
+    document.querySelector('.year').classList.add('active');
     setTimeout(() => {
       cancelAnimationFrame(req)
       music.pause();
+      document.querySelector('.year').classList.remove('active');
       reset();
     }, 60000 * 5)
 
