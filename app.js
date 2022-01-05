@@ -56,7 +56,7 @@ function StartFireworks() {
   const min = document.querySelector("#mins");
   const sec = document.querySelector("#secs");
 
-  if (day.innerHTML == 30 && hour.innerHTML == 0 && min.innerHTML == 22 && sec.innerHTML == 10) {
+  if (day.innerHTML == 0 && hour.innerHTML == 0 && min.innerHTML == 4 && sec.innerHTML == 10) {
     animate()
     let music = new Audio("./audio/HappyNewYear-ABBA-1595921.mp3")
     music.play()
